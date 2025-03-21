@@ -8,6 +8,8 @@
     android:id="@id/main"
     tools:context=".IntroActivity">
 
+    <!-- 22110335 - Pham Hoang Huy -->
+
     <!-- Phần trên (7 phần) -->
 
     <!-- Phần dưới (3 phần) -->

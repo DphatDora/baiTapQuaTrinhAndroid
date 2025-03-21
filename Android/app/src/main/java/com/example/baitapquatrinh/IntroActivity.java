@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.baitapquatrinh.MainActivity;
 import com.example.baitapquatrinh.R;
 import com.example.baitapquatrinh.SessionManager;
-
+//22110335 - Pham Hoang Huy
 public class IntroActivity extends AppCompatActivity {
 
     private Button btn_start;
