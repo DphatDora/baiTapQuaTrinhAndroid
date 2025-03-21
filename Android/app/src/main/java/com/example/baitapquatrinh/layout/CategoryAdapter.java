@@ -38,7 +38,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
                 .load(category.getImages())
                 .into(holder.images);
     }
-
+    // Nhaan
     @Override
     public int getItemCount() {
         return array == null ? 0 : array.size();
