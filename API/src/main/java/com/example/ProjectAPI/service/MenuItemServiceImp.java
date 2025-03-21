@@ -4,6 +4,8 @@ import com.example.ProjectAPI.model.MenuItem;
 import com.example.ProjectAPI.repository.CategoryRepository;
 import com.example.ProjectAPI.repository.MenuItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -33,5 +35,10 @@ public class MenuItemServiceImp implements IMenuItemService {
     @Override
     public <S extends MenuItem> S save(S entity) {
         return menuItemRepository.save(entity);
+    }
+    @Override
+    public List<MenuItem> getMenuItemsWithPagination(LocalDate fromDate, int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page - 1, pageSize);
+        return menuItemRepository.findByCreateDateAfterOrderByPriceAsc(fromDate, pageable);
     }
 }
