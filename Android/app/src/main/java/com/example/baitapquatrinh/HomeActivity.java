@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -49,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
 
         loadMenuItem();
 
-        // Tải dữ liệu trang đầu tiên
+        // Tải dữ liệu trang đầu tiên - Trần Thanh Nhã
         SessionManager sessionManager = new SessionManager(HomeActivity.this);
         String name = sessionManager.getUsername();
         String email = sessionManager.getUserEmail();
@@ -81,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-
+// Hà Đức Phát - 22110393 : load product to grid view lazy loading
     private void loadMenuItem() {
         isLoading = true; // Đánh dấu đang tải dữ liệu
         apiService.getMenuItemsByPage(page, PAGE_SIZE).enqueue(new Callback<List<MenuItem>>() {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
-
+// Hà Đức Phát - 22110393
 public class MenuItemAdapter extends BaseAdapter {
     private Context context;
     private int layout;

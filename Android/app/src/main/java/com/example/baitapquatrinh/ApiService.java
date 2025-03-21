@@ -7,6 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface ApiService {
+    // Hà Đức Phát - 22110393
     @GET("item/latest-created")
     Call<List<MenuItem>> getLastestMenuItems();
     @GET("item/latest-price")
