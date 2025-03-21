@@ -1,10 +1,9 @@
-package com.example.baitapquatrinh;
+package com.example.baitapquatrinh.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.baitapquatrinh.MainActivity;
 import com.example.baitapquatrinh.R;
-import com.example.baitapquatrinh.SessionManager;
+import com.example.baitapquatrinh.utils.SessionManager;
 //22110335 - Pham Hoang Huy
 public class IntroActivity extends AppCompatActivity {
 

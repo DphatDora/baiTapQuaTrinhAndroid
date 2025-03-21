@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@id/main"
-    tools:context=".IntroActivity">
+    tools:context=".activity.IntroActivity">
 
     <!-- 22110335 - Pham Hoang Huy -->
 
