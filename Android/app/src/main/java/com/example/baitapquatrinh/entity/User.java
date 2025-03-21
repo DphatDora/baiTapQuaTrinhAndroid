@@ -1,14 +1,14 @@
 package com.example.baitapquatrinh.entity;
 
 public class User {
-    private int id;
+    private Long id;
     private String username;
     private String phone;
     private String email;
     private String password;
     private String address;
 
-    public User(int id, String username, String phone, String email, String password, String address) {
+    public User(Long id, String username, String phone, String email, String password, String address) {
         this.id = id;
         this.username = username;
         this.phone = phone;
@@ -17,11 +17,11 @@ public class User {
         this.address = address;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

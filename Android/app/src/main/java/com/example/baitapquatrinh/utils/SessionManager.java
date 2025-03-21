@@ -1,4 +1,4 @@
-package com.example.baitapquatrinh.utils;
+package com.example.baitapquatrinh;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,15 +17,24 @@ public class SessionManager {
         editor = sharedPreferences.edit();
     }
 
-    public void saveUser(int userId, String email) {
-        editor.putInt(KEY_USER_ID, userId);  // neu da ton tai thi no ghi de len cai userID va email cu
+    public void saveUser(Long userId , String email, String userName) {
+        editor.putLong(KEY_USER_ID, userId);  // neu da ton tai thi no ghi de len cai userID va email cu
         editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_USERNAME, userName);
         editor.apply();
     }
 
 
-    public int getUserId() {
-        return sharedPreferences.getInt(KEY_USER_ID, -1);
+    public Long getUserId() {
+        return sharedPreferences.getLong(KEY_USER_ID, -1);
+    }
+
+    public String getUsername() {
+        return sharedPreferences.getString(KEY_USERNAME, "");
+    }
+
+    public String getUserEmail() {
+        return sharedPreferences.getString(KEY_EMAIL, "");
     }
 
     public boolean isLoggedIn() {
