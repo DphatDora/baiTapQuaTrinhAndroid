@@ -10,8 +10,15 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.baitapquatrinh.api.APIService;
+import com.example.baitapquatrinh.api.RetrofitClient;
+import com.example.baitapquatrinh.layout.CategoryAdapter;
+import com.example.baitapquatrinh.model.Category;
+import com.example.baitapquatrinh.utils.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +29,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private RecyclerView rcCate;
+    private CategoryAdapter categoryAdapter;
+    private List<Category> categoryList;
     private GridView gridView;
     private MenuItemAdapter menuItemAdapter;
     private List<MenuItem> menuItemList = new ArrayList<>();
-    private ApiService apiService;
+    private APIService apiService;
 
     private TextView txtName, txtEmail;
     private ImageView imgAvatar;
@@ -45,11 +56,14 @@ public class HomeActivity extends AppCompatActivity {
         imgAvatar = findViewById(R.id.imgAvatar);
 
         gridView = findViewById(R.id.gridMenuItem);
-        apiService = RetrofitClient.getRetrofit().create(ApiService.class);
+        apiService = RetrofitClient.getInstance();
         menuItemAdapter = new MenuItemAdapter(this, R.layout.item_gridview, menuItemList);
         gridView.setAdapter(menuItemAdapter);
 
         loadMenuItem();
+
+        rcCate = findViewById(R.id.rc_category);
+        getCategory();
 
         // Tải dữ liệu trang đầu tiên - Trần Thanh Nhã
         SessionManager sessionManager = new SessionManager(HomeActivity.this);
@@ -104,6 +118,38 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "Lỗi kết nối", Toast.LENGTH_SHORT).show();
                 Log.e("API_ERROR", Objects.requireNonNull(t.getMessage()));
                 isLoading = false;
+            }
+        });
+    }
+    private void getCategory() {
+        apiService = RetrofitClient.getInstance();
+        apiService.getCategoryAll().enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    categoryList = response.body();
+
+                    if (categoryAdapter == null) {
+                        categoryAdapter = new CategoryAdapter(HomeActivity.this, categoryList);
+                        rcCate.setHasFixedSize(true);
+                        RecyclerView.LayoutManager layoutManager =
+                                new LinearLayoutManager(getApplicationContext(),
+                                        LinearLayoutManager.HORIZONTAL, false);
+
+                        rcCate.setLayoutManager(layoutManager);
+                        rcCate.setAdapter(categoryAdapter);
+                    } else {
+                        categoryAdapter.updateData(categoryList);
+                    }
+                } else {
+                    Toast.makeText(HomeActivity.this, "Lỗi lấy dữ liệu!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+                Log.d("logg>>>>", t.getMessage());
+                Toast.makeText(HomeActivity.this, "Lỗi kết nối!", Toast.LENGTH_SHORT).show();
             }
         });
     }

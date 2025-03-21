@@ -160,7 +160,7 @@ public class RegisterActivity extends AppCompatActivity {
                     ApiResponse apiResponse = response.body();
                     Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_LONG).show();
                     if (apiResponse.getStatus().equals("success")) {
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     }
