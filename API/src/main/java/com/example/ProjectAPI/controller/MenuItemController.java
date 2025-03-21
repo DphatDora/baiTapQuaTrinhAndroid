@@ -109,4 +109,31 @@ public class MenuItemController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @GetMapping("/latest-price")
+    public ResponseEntity<List<MenuItemDTO>> getLatestPriceMenuItems(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "4") int pageSize) {
+
+        LocalDate daysAgo = LocalDate.now().minusDays(7);
+        List<MenuItem> menuItemList = MenuItemService.getMenuItemsWithPagination(daysAgo, page, pageSize);
+
+        if (menuItemList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        List<MenuItemDTO> menuItemDTOList = menuItemList.stream()
+                .map(item -> new MenuItemDTO(
+                        item.getId(),
+                        item.getName(),
+                        item.getPrice(),
+                        item.getSoldQuantity(),
+                        item.getCreateDate(),
+                        item.getImgMenuItem(),
+                        item.getCategory().getId()
+                ))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(menuItemDTOList);
+    }
 }

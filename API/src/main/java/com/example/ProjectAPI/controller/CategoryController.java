@@ -1,5 +1,6 @@
 package com.example.ProjectAPI.controller;
 
+import com.example.ProjectAPI.DTO.CategoryDTO;
 import com.example.ProjectAPI.model.Category;
 import com.example.ProjectAPI.model.CategoryType;
 import com.example.ProjectAPI.service.CategoryServiceImp;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/cate")
@@ -25,7 +27,15 @@ public class CategoryController {
         if (categoryList.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(categoryList);
+        List<CategoryDTO> categoryDTOList = categoryList.stream()
+                .map(category -> new CategoryDTO(
+                        category.getId(),
+                        category.getType(),
+                        category.getImgCategory()
+                ))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(categoryDTOList);
     }
 
     @PostMapping("/add-category")
