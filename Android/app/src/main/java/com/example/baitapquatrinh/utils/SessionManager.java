@@ -1,4 +1,4 @@
-package com.example.baitapquatrinh;
+package com.example.baitapquatrinh.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
