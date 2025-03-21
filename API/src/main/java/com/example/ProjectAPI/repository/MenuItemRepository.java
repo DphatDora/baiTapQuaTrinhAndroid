@@ -1,6 +1,7 @@
 package com.example.ProjectAPI.repository;
 
 import com.example.ProjectAPI.model.MenuItem;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -25,4 +26,7 @@ public interface MenuItemRepository extends JpaRepository<MenuItem, Integer> {
     //top 10 sản phẩm được tạo trong vòng 7 ngày
     @Query("select i from MenuItem i where i.createDate >= :daysAgo order by i.createDate desc limit 10")
     List<MenuItem> findTop10LatestCreatedMenuItems(LocalDate daysAgo);
+
+    List<MenuItem> findByCreateDateAfterOrderByPriceAsc(LocalDate fromDate, Pageable pageable);
+
 }
