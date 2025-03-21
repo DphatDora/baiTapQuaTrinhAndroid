@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.baitapquatrinh.HomeActivity;
 import com.example.baitapquatrinh.R;
 import com.example.baitapquatrinh.utils.SessionManager;
 //22110335 - Pham Hoang Huy
@@ -43,7 +44,7 @@ public class IntroActivity extends AppCompatActivity {
                 SessionManager sessionManager = new SessionManager(IntroActivity.this);
                 Intent intent = new Intent();
                 if (sessionManager.isLoggedIn()){
-                    intent.setClass(IntroActivity.this, MainActivity.class);
+                    intent.setClass(IntroActivity.this, HomeActivity.class);
                 }
                 else{
                     // mo activity login

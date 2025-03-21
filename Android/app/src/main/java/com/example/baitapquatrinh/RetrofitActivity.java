@@ -7,13 +7,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
-import baitapquatrinh.Call;
-import baitapquatrinh.Callback;
-import baitapquatrinh.Response;
+
+import com.example.baitapquatrinh.api.APIService;
+import com.example.baitapquatrinh.api.RetrofitClient;
 import com.example.baitapquatrinh.model.Category;
 import com.example.baitapquatrinh.layout.CategoryAdapter;
-import com.example.baitapquatrinh.net.RetrofitClient;
-import com.example.baitapquatrinh.net.APIService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class RetrofitActivity extends AppCompatActivity {
     private RecyclerView rcCate;
@@ -30,7 +33,7 @@ public class RetrofitActivity extends AppCompatActivity {
     }
 
     private void getCategory() {
-        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService = RetrofitClient.getInstance();
         apiService.getCategoryAll().enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {

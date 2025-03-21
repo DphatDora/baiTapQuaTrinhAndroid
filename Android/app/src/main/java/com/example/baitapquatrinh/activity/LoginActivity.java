@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.baitapquatrinh.HomeActivity;
 import com.example.baitapquatrinh.R;
 import com.example.baitapquatrinh.api.APIService;
 import com.example.baitapquatrinh.api.RetrofitClient;
@@ -93,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                             prefManager.saveUser(user.getId(), user.getEmail(), user.getUsername());
 
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                             finish();
                         }else if (response.code() == 400) {
                             try {
