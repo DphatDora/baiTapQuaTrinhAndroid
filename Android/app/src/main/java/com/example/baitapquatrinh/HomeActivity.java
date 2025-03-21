@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.AbsListView;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,6 +25,9 @@ public class HomeActivity extends AppCompatActivity {
     private List<MenuItem> menuItemList = new ArrayList<>();
     private ApiService apiService;
 
+    private TextView txtName, txtEmail;
+    private ImageView imgAvatar;
+
     private boolean isLoading = false;
     private int page = 1;
     private static final int PAGE_SIZE = 2;
@@ -33,12 +38,34 @@ public class HomeActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.home_page);
 
+        txtName = findViewById(R.id.txtName);
+        txtEmail = findViewById(R.id.txtEmail);
+        imgAvatar = findViewById(R.id.imgAvatar);
+
         gridView = findViewById(R.id.gridMenuItem);
         apiService = RetrofitClient.getRetrofit().create(ApiService.class);
         menuItemAdapter = new MenuItemAdapter(this, R.layout.item_gridview, menuItemList);
         gridView.setAdapter(menuItemAdapter);
 
-        loadMenuItem(); // Tải dữ liệu trang đầu tiên
+        loadMenuItem();
+
+        // Tải dữ liệu trang đầu tiên
+        SessionManager sessionManager = new SessionManager(HomeActivity.this);
+        String name = sessionManager.getUsername();
+        String email = sessionManager.getUserEmail();
+
+
+        String avatarUrl = "";
+
+        // Gán dữ liệu lên giao diện
+        txtName.setText("Hi! " + name);
+        txtEmail.setText(email);
+
+        // Hiển thị ảnh với Glide
+        Glide.with(this)
+                .load(avatarUrl)
+                .error(R.drawable.ic_error) // Ảnh lỗi nếu không tải được
+                .into(imgAvatar);
 
         // Lắng nghe sự kiện cuộn để lazy loading
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
